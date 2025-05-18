@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <div className="App">
+      <Navbar />
+      
       <header className="header">
         <h1>Ishaan Desai</h1>
         <p>Student</p>
