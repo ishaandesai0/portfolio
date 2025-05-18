@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+import About from './components/About';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <p>I am starting my final Semester at Northeastern, majoring in Computer Engineering and minoring in Business Administration</p>
           <button className="cta-button">View My Work</button>
         </section>
+
+        {/* Add your About component here */}
+        <About />
       </main>
     </div>
   );
