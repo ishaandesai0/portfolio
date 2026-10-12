@@ -20,7 +20,6 @@ function App() {
           <button className="cta-button">View My Work</button>
         </section>
 
-        {/* Add your About component here */}
         <About />
       </main>
     </div>
