@@ -3,7 +3,7 @@
 Personal portfolio site built with React, showcasing my projects, background,
 and contact information.
 
-**Live site:** [add URL once deployed]
+**Live site:** [ishaandesai.vercel.app](https://ishaandesai.vercel.app)
 
 ## Overview
 
@@ -44,7 +44,7 @@ npm test
 
 ## Deployment
 
-[Add deployment details once live — e.g. Vercel/Netlify, auto-deploys from `main`]
+Deployed on Vercel, auto-deploys from the main branch on every push.
 
 ## Contact
 
