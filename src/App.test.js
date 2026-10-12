@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -30,9 +30,9 @@ test('lists four finished projects and two in progress, separately', () => {
   expect(within(container.querySelector('#projects')).queryByText('FPL Optimization Pipeline')).toBeNull();
 });
 
-test('swarm robotics is labelled as a contribution, panoramic has no link', () => {
+test('swarm robotics is labelled as a team project, panoramic has no link', () => {
   render(<App />);
-  expect(screen.getByRole('link', { name: /View repo \(contributor\)/ })).toHaveAttribute(
+  expect(screen.getByRole('link', { name: /View repo \(team project\)/ })).toHaveAttribute(
     'href',
     'https://github.com/jackgladowsky/swarm_robots'
   );
@@ -62,4 +62,34 @@ test('mobile menu toggle opens and closes', async () => {
   expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await userEvent.click(within(screen.getByRole('navigation')).getByRole('link', { name: 'Projects' }));
   expect(toggle).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('sections are never hidden when IntersectionObserver is unavailable', () => {
+  expect('IntersectionObserver' in window).toBe(false);
+  const { container } = render(<App />);
+  expect(container.querySelectorAll('.reveal')).toHaveLength(4);
+  expect(document.documentElement).not.toHaveClass('reveal-ready');
+});
+
+test('with IntersectionObserver, sections are hidden until observed, then revealed', () => {
+  const observed = [];
+  let callback;
+  window.IntersectionObserver = class {
+    constructor(cb) { callback = cb; }
+    observe(el) { observed.push(el); }
+    unobserve() {}
+    disconnect() {}
+  };
+  try {
+    const { unmount } = render(<App />);
+    expect(document.documentElement).toHaveClass('reveal-ready');
+    expect(observed).toHaveLength(4);
+    act(() => callback([{ target: observed[0], isIntersecting: true }]));
+    expect(observed[0]).toHaveClass('is-visible');
+    expect(observed[1]).not.toHaveClass('is-visible');
+    unmount();
+    expect(document.documentElement).not.toHaveClass('reveal-ready');
+  } finally {
+    delete window.IntersectionObserver;
+  }
 });

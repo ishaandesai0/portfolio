@@ -9,6 +9,9 @@
   --accent-light: #64b5f6;
   --accent-dark: #0d47a1;
   --wip: #ffb74d;
+  --border: rgba(33, 150, 243, 0.35);
+  --glow: rgba(33, 150, 243, 0.35);
+  --mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
 }
 
 * {
@@ -29,7 +32,84 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg);
+  /* A soft blue glow at the top over a faint dot grid, instead of flat black */
+  background-image:
+    radial-gradient(ellipse 90% 40rem at 50% -8rem, rgba(33, 150, 243, 0.14), transparent 70%),
+    radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 22px 22px;
+  background-repeat: no-repeat, repeat;
   color: var(--text);
+}
+
+/* Section headings: white title, a small mono index, and a rule that fades out */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.6;
+}
+
+.section-index {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.section-title-wip .section-index {
+  color: var(--wip);
+  border-color: rgba(255, 183, 77, 0.4);
+}
+
+.section-title-wip::after {
+  background: linear-gradient(90deg, var(--wip), transparent);
+}
+
+/* Scroll reveal. Hidden only once useReveal has set .reveal-ready on <html>,
+   so nothing stays invisible if the observer never runs. */
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal-ready .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Keep anchored sections clear of the sticky navbar */

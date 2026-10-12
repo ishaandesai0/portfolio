@@ -4,7 +4,6 @@
 
 /* Header styles */
 .header {
-  background-color: #000000;
   color: white;
   padding: 1.5rem;
   text-align: center;
@@ -16,6 +15,11 @@
   color: var(--accent);
 }
 
+.header p {
+  color: #b0bec5;
+  letter-spacing: 0.02em;
+}
+
 /* Main content styles */
 .main-content {
   max-width: 1200px;
@@ -25,12 +29,32 @@
 
 /* Hero section styles */
 .hero-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   text-align: center;
   padding: 4rem 1rem;
-  background-color: var(--surface);
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(33, 150, 243, 0.2), transparent 70%),
+    var(--surface);
   border-radius: 8px;
   margin-top: 2rem;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--border);
+}
+
+/* Faint grid behind the hero copy, fading out toward the edges */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(33, 150, 243, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33, 150, 243, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 65% 80% at 50% 40%, black, transparent 75%);
+  mask-image: radial-gradient(ellipse 65% 80% at 50% 40%, black, transparent 75%);
 }
 
 .hero-section h2 {

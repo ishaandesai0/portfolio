@@ -15,8 +15,8 @@ function TechList({ tech }) {
 function Projects() {
   return (
     <>
-      <section className="projects" id="projects">
-        <h2>Projects</h2>
+      <section className="projects reveal" id="projects">
+        <h2 className="section-title"><span className="section-index" aria-hidden="true">02</span>Projects</h2>
         <div className="project-grid">
           {projects.map((p) => (
             <article className="project-card" key={p.title}>
@@ -41,8 +41,8 @@ function Projects() {
         </div>
       </section>
 
-      <section className="in-progress" id="building">
-        <h2>Currently Building</h2>
+      <section className="in-progress reveal" id="building">
+        <h2 className="section-title section-title-wip"><span className="section-index" aria-hidden="true">03</span>Currently Building</h2>
         <div className="in-progress-list">
           {inProgress.map((p) => (
             <article className="in-progress-card" key={p.title}>

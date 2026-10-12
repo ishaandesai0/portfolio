@@ -11,8 +11,8 @@ const links = [
 
 function Contact() {
   return (
-    <section className="contact" id="contact">
-      <h2>Contact</h2>
+    <section className="contact reveal" id="contact">
+      <h2 className="section-title"><span className="section-index" aria-hidden="true">04</span>Contact</h2>
       <p className="contact-intro">
         The fastest way to reach me is email.
       </p>

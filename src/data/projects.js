@@ -23,12 +23,12 @@ export const projects = [
   },
   {
     title: 'Swarm Robotics for Mapping & Task Planning',
-    badge: 'Contributor',
+    badge: 'Team project',
     description:
-      'Multi-agent swarm robotics system in C++ performing autonomous environment exploration via graph-based DFS/BFS traversal with backtracking. Optimized node traversal using STL vectors and stacks for O(N+E) complete graph exploration, with a modular controller architecture coordinating multiple robots for object retrieval and path planning.',
+      'Multi-agent swarm robotics system in C++ performing autonomous environment exploration via graph-based DFS/BFS traversal with backtracking. Optimized node traversal using STL vectors and stacks for O(N+E) complete graph exploration, with a modular controller architecture coordinating multiple robots for object retrieval and path planning. Course team project — repo hosted under a teammate’s account.',
     tech: ['C++', 'STL'],
     link: 'https://github.com/jackgladowsky/swarm_robots',
-    linkLabel: 'View repo (contributor)',
+    linkLabel: 'View repo (team project)',
   },
 ];
 
