@@ -54,6 +54,40 @@ test('contact links and resume', () => {
   );
 });
 
+test('skills section sits between About and Projects with every category', () => {
+  const { container } = render(<App />);
+  const order = [...container.querySelectorAll('main section[id]')].map((s) => s.id);
+  expect(order).toEqual(['about', 'skills', 'projects', 'building', 'contact']);
+
+  const skills = container.querySelector('#skills');
+  const categories = [...skills.querySelectorAll('dt')].map((dt) => dt.textContent);
+  expect(categories).toEqual(['Languages', 'Parallel/HPC', 'Frameworks', 'Developer Tools', 'Libraries']);
+  expect(within(skills).getAllByRole('listitem')).toHaveLength(29);
+  expect(within(within(skills).getByRole('list', { name: 'Parallel/HPC' })).getAllByRole('listitem').map((li) => li.textContent))
+    .toEqual(['CUDA', 'OpenMP', 'MPI', 'SLURM']);
+});
+
+test('section index tags are sequential in page order', () => {
+  const { container } = render(<App />);
+  const tags = [...container.querySelectorAll('.section-index')].map((t) => t.textContent);
+  expect(tags).toEqual(['01', '02', '03', '04', '05']);
+});
+
+test('mobile menu lists Skills in order and closes when it is tapped', async () => {
+  render(<App />);
+  const nav = screen.getByRole('navigation', { name: 'Main' });
+  const toggle = within(nav).getByRole('button', { name: 'Open menu' });
+  await userEvent.click(toggle);
+  const menu = nav.querySelector('#nav-links');
+  expect(menu).toHaveClass('open');
+  expect(within(menu).getAllByRole('link').map((a) => a.textContent)).toEqual(['Home', 'About', 'Skills', 'Projects', 'Contact']);
+  const skillsLink = within(menu).getByRole('link', { name: 'Skills' });
+  expect(skillsLink).toHaveAttribute('href', '#skills');
+  await userEvent.click(skillsLink);
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(menu).not.toHaveClass('open');
+});
+
 test('mobile menu toggle opens and closes', async () => {
   render(<App />);
   const toggle = screen.getByRole('button', { name: 'Open menu' });
@@ -67,7 +101,7 @@ test('mobile menu toggle opens and closes', async () => {
 test('sections are never hidden when IntersectionObserver is unavailable', () => {
   expect('IntersectionObserver' in window).toBe(false);
   const { container } = render(<App />);
-  expect(container.querySelectorAll('.reveal')).toHaveLength(4);
+  expect(container.querySelectorAll('.reveal')).toHaveLength(5);
   expect(document.documentElement).not.toHaveClass('reveal-ready');
 });
 
@@ -83,7 +117,7 @@ test('with IntersectionObserver, sections are hidden until observed, then reveal
   try {
     const { unmount } = render(<App />);
     expect(document.documentElement).toHaveClass('reveal-ready');
-    expect(observed).toHaveLength(4);
+    expect(observed).toHaveLength(5);
     act(() => callback([{ target: observed[0], isIntersecting: true }]));
     expect(observed[0]).toHaveClass('is-visible');
     expect(observed[1]).not.toHaveClass('is-visible');

@@ -1,22 +1,13 @@
 import React from 'react';
 import './Projects.css';
+import TechList from './TechList';
 import { projects, inProgress } from '../data/projects';
-
-function TechList({ tech }) {
-  return (
-    <ul className="tech-list" aria-label="Technologies">
-      {tech.map((t) => (
-        <li key={t}>{t}</li>
-      ))}
-    </ul>
-  );
-}
 
 function Projects() {
   return (
     <>
       <section className="projects reveal" id="projects">
-        <h2 className="section-title"><span className="section-index" aria-hidden="true">02</span>Projects</h2>
+        <h2 className="section-title"><span className="section-index" aria-hidden="true">03</span>Projects</h2>
         <div className="project-grid">
           {projects.map((p) => (
             <article className="project-card" key={p.title}>
@@ -42,7 +33,7 @@ function Projects() {
       </section>
 
       <section className="in-progress reveal" id="building">
-        <h2 className="section-title section-title-wip"><span className="section-index" aria-hidden="true">03</span>Currently Building</h2>
+        <h2 className="section-title section-title-wip"><span className="section-index" aria-hidden="true">04</span>Currently Building</h2>
         <div className="in-progress-list">
           {inProgress.map((p) => (
             <article className="in-progress-card" key={p.title}>
