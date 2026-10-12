@@ -2,25 +2,29 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      
-      <header className="header">
+
+      <header className="header" id="home">
         <h1>Ishaan Desai</h1>
-        <p>Student</p>
+        <p>Computer Engineer — Systems, ML, and High-Performance Computing</p>
       </header>
-      
+
       <main className="main-content">
         <section className="hero-section">
           <h2>Welcome to My Portfolio</h2>
-          <p>I am starting my final Semester at Northeastern, majoring in Computer Engineering and minoring in Business Administration</p>
-          <button className="cta-button">View My Work</button>
+          <p>I'm pursuing an MS in Electrical and Computer Engineering at Northeastern, focused on machine learning, computer vision, and algorithms.</p>
+          <a className="cta-button" href="#projects">View My Work</a>
         </section>
 
         <About />
+        <Projects />
+        <Contact />
       </main>
     </div>
   );

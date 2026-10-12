@@ -11,9 +11,10 @@
 }
 
 .logo {
-  color: #2196F3;
+  color: var(--accent);
   font-size: 1.5rem;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .nav-links {
@@ -33,12 +34,54 @@
 }
 
 .nav-links a:hover {
-  color: #2196F3;
+  color: var(--accent);
 }
 
-/* Mobile responsiveness */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 1.25rem;
+  line-height: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+/* Mobile: links collapse behind the toggle and drop down under the bar */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #000000;
+    border-bottom: 1px solid var(--accent);
+    padding: 0.5rem 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 0;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.75rem 1.5rem;
   }
 }

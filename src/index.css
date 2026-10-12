@@ -1,48 +1,75 @@
-body {
+/* Global styles: reset, theme tokens, and the one body rule.
+   Component styles live next to their components. */
+:root {
+  --bg: #121212;
+  --surface: #1a1a1a;
+  --text: #f5f5f5;
+  --text-muted: #e0e0e0;
+  --accent: #2196F3;
+  --accent-light: #64b5f6;
+  --accent-dark: #0d47a1;
+  --wip: #ffb74d;
+}
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #121212;
-  color: #f5f5f5;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Keep anchored sections clear of the sticky navbar */
+section[id],
+header[id] {
+  scroll-margin-top: 5rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  background-color: #1a1a1a;
-  color: #2196F3;
+  background-color: var(--surface);
+  color: var(--accent);
   padding: 2px 4px;
   border-radius: 3px;
 }
 
-/* Global styles for blue and black theme */
 a {
-  color: #2196F3;
+  color: var(--accent);
 }
 
-/* Blue accent for focus states */
-*:focus {
-  outline: 2px solid #2196F3;
+/* Keyboard focus only, so mouse clicks don't leave outlines */
+*:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Custom scrollbar with blue accent */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2196F3;
+  background: var(--accent);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d47a1;
+  background: var(--accent-dark);
 }
